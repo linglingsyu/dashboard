@@ -1,86 +1,39 @@
-<script setup>
-import { RouterLink, RouterView } from "vue-router";
-import HelloWorld from "./components/HelloWorld.vue";
-import LogoSVG from "./assets/logo.svg?component";
-</script>
-
 <template>
-  <header>
-    <LogoSVG alt="Vite logo" class="logo" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
+  <Authenticator :hide-sign-up="true">
+    <div class="flex flex-row">
+      <SideMenu></SideMenu>
+      <div class="flex w-full flex-col p-4">
+        <div class="w-full">
+          <!-- <label for="sidebar-mobile-fixed" class="btn-primary btn sm:hidden"
+          >Open Sidebar</label
+        > -->
+          <MenuIcon></MenuIcon>
+          <!-- <button @click="switchTheme" type="button">switch Mode</button> -->
+          <RouterView />
+        </div>
+      </div>
     </div>
-  </header>
-
-  <RouterView />
+  </Authenticator>
 </template>
-
-<style scoped>
-header {
-  line-height: 1.5;
-  max-height: 100vh;
-}
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-nav {
-  width: 100%;
-  font-size: 12px;
-  text-align: center;
-  margin-top: 2rem;
-}
-
-nav a.router-link-exact-active {
-  color: var(--color-text);
-}
-
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
-}
-
-nav a {
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
-}
-
-nav a:first-of-type {
-  border: 0;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-
-  nav {
-    text-align: left;
-    margin-left: -1rem;
-    font-size: 1rem;
-
-    padding: 1rem 0;
-    margin-top: 1rem;
-  }
-}
-</style>
+<script>
+import '@aws-amplify/ui-vue/styles.css';
+import SideMenu from '@/components/SideMenu/SideMenu.vue';
+import MenuIcon from '@/components/icons/IconMenu.vue';
+export default {
+  methods: {
+    switchTheme() {
+      const html = document.querySelector('html');
+      if (html.dataset.theme) {
+        delete html.dataset.theme;
+      } else {
+        html.dataset.theme = 'dark';
+      }
+    },
+  },
+  components: {
+    SideMenu,
+    MenuIcon,
+  },
+};
+</script>
+<style scoped></style>

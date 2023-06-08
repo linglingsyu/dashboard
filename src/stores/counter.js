@@ -1,7 +1,8 @@
-import { defineStore } from "pinia";
+import { defineStore } from 'pinia';
+// import { API } from 'aws-amplify';
 
-export const useCounterStore = defineStore({
-  id: "counter",
+export const AuthStore = defineStore({
+  id: 'counter',
   state: () => ({
     counter: 0,
   }),
